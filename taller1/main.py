@@ -1,16 +1,13 @@
-palabras = [] #puede estar dentro de recibirPalabras
-
 def recibirInput():
     cantidadCasos = int(input())
-    
+    palabras = []     
     for i in range(0,cantidadCasos):
         cantidadLetras = int(input()) #no me sirve realmente
         palabra = input()
         palabras.append((cantidadLetras,palabra))
     
-    return palabras
+    return palabras #acá tengo que hacer el output que va a consola
 
-recibirInput()
 
 def cantidadesDeCambios(palabras:list[str]):
     resultado = []
@@ -19,6 +16,7 @@ def cantidadesDeCambios(palabras:list[str]):
         resultado.append(str(esPalabraLinda(palabras[i][1],'a'))) #esto debería calcular cuantos cambios hay que hacerle a la palabra determinada
     
     return
+
 
 def esPalabraLinda(palabra:str, letra:str) -> int: #aca decido si el string es l-lindo o no y devuelvo si hay que hacer un cambio o no en forma de int
     cambios:int = 0
@@ -39,8 +37,12 @@ def esPalabraLinda(palabra:str, letra:str) -> int: #aca decido si el string es l
     else: #no se bien que hacer aca, hay un problema con la logica
         return cambios  
         
-#esStringLindo('a', 'b')
 
+if __name__ == "__main__":
+    recibirInput()
+
+
+#esStringLindo('a', 'b')
 #Input
 '''
 6
@@ -58,6 +60,7 @@ da
 ccddaabb
 '''
 
+
 #Output
 '''
 0
@@ -67,7 +70,6 @@ ccddaabb
 1
 5
 '''
-
 
 
 ################ PRUEBAS ################ 
