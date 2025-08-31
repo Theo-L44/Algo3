@@ -34,5 +34,47 @@ def esStringLindo(palabra:str, letra:str) -> int: #aca decido si el string es l-
     else:
         return 1
 
-esStringLindo('a', 'b')
- 
+#esStringLindo('a', 'b')
+
+palabras = [] #puede estar dentro de recibirPalabras
+
+def recibirPalabras():
+    cantidadCasos = int(input())
+    
+    for i in range(0,cantidadCasos):
+        cantidadLetras = int(input())
+        palabra = input()
+        palabras.append((cantidadLetras,palabra))
+    
+    return palabras
+
+recibirPalabras()
+
+
+#Input
+'''
+6
+8
+aaaadcbb
+8
+bbaaceaa
+8
+jkghasdf
+1
+x
+2
+da
+8
+ccddaabb
+'''
+
+#Output
+'''
+0
+4
+7
+1
+1
+5
+'''
+
