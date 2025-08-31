@@ -9,24 +9,23 @@ def recibirInput():
     return palabras #acá tengo que hacer el output que va a consola
 
 
-def cantidadesDeCambios(palabras:list[str]):
-    resultado = []
-
-    for i in range(len(palabras)):
-        resultado.append(str(esPalabraLinda(palabras[i][1],'a'))) #esto debería calcular cuantos cambios hay que hacerle a la palabra determinada
+def cantidadesDeCambios(palabras:list[str])->list[int]:
+    resultados = []
+    for palabra in palabras:
+        resultados.append(str(esPalabraLinda(palabra,'a'))) #esto debería calcular cuantos cambios hay que hacerle a la palabra determinada
     
-    return
+    return resultados
 
 
-def esPalabraLinda(palabra:str, letra:str) -> int: #aca decido si el string es l-lindo o no y devuelvo si hay que hacer un cambio o no en forma de int
+def esPalabraLinda(largo:int, palabra:str, letra:str) -> int: #aca decido si el string es l-lindo o no y devuelvo si hay que hacer un cambio o no en forma de int
     cambios:int = 0
     if len(palabra) == 1 and palabra==letra: #casos base
-        return cambios#no hubo ningún cambio
+        return cambios #no hubo ningún cambio
     elif len(palabra) == 1 and palabra!=letra:
-        cambios += 1 #sumo uno a cambios
+        cambios += 1 #sumo uno a cambios porque no coinciden las letras
         return cambios
     
-    mitad: int = len(palabra) // 2 #div entera 
+    mitad: int = largo // 2 #div entera 
     mitadIzq: str = palabra[:mitad]
     mitadDer: str = palabra[mitad:]
 
