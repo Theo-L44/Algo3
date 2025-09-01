@@ -1,8 +1,8 @@
-def recibirInput():
+def recibirInput()->list[str]:
     cantidadCasos = int(input())
-    palabras = []     
+    palabras:list[str] = []     
     for i in range(0,cantidadCasos):
-        cantidadLetras = int(input()) #no me sirve realmente
+        cantidadLetras = int(input()) #no me sirve realmente, aprovecho para descartar la linea de los largos de palabras
         palabra = input()
         palabras.append(palabra)
     
@@ -10,7 +10,8 @@ def recibirInput():
 
 
 def cantidadesDeCambios(palabras:list[str])->list[int]:
-    listaDeCambios = []
+    listaDeCambios:list[int] = []
+
     for palabra in palabras:
         listaDeCambios.append(str(esPalabraLinda(len(palabra),palabra,'a'))) #esto debería calcular cuantos cambios hay que hacerle a la palabra determinada
     
@@ -19,6 +20,7 @@ def cantidadesDeCambios(palabras:list[str])->list[int]:
 
 def esPalabraLinda(largo:int, palabra:str, letra:str) -> int: #aca decido si el string es l-lindo o no y devuelvo si hay que hacer un cambio o no en forma de int
     cambios:int = 0
+
     if len(palabra) == 1 and palabra==letra: #casos base
         return cambios #no hubo ningún cambio
     elif len(palabra) == 1 and palabra!=letra:
