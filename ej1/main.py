@@ -1,4 +1,4 @@
-def recibirInput()->list[str]:
+def recibirInput()->list[str]: #recibo el input puesto en consola
     cantidadCasos = int(input())
     palabras:list[str] = []     
     for i in range(0,cantidadCasos):
@@ -9,7 +9,7 @@ def recibirInput()->list[str]:
     return palabras
 
 
-def cantidadesDeCambios(palabras:list[str])->list[int]:
+def cantidadesDeCambios(palabras:list[str])->list[int]: #por cada palabra llamo a la funcion que calcula los cambios que hay que hacer y devuelvo una lista con los cambios
     listaDeCambios:list[int] = []
 
     for palabra in palabras:
@@ -54,7 +54,6 @@ if __name__ == "__main__":
     output = cantidadesDeCambios(strings)
     for i in output:
         print(i)
-
 
 
 #Input
