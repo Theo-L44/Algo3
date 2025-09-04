@@ -18,7 +18,7 @@ def cantidadesDeCambios(palabras:list[str])->list[int]: #por cada palabra llamo 
     return listaDeCambios
 
 
-def esPalabraLinda(largo:int, palabra:str, letra:str) -> int: #aca decido si el string es l-lindo o no y devuelvo si hay que hacer un cambio o no en forma de int
+def esPalabraLinda(largo:int, palabra:str, letra:str) -> int: #aca decido si el string es l-lindo o no y devuelvo cuantos cambios hubo que hacer hasta que efectivamente fue a-lindo, se devuelve en forma de int
     cambios:int = 0
 
     if len(palabra) == 1 and palabra==letra: #casos base
