@@ -29,11 +29,11 @@ def listarMovimientos(valorInicial:int, valorObjetivo:int):
             valorActual-1 #de esta manera me queda un valor menor al inicial y salgo del bucle
             return movimientos
         elif valorActual % 2 == 0: #si el valor es par significa que provino de hacer la multiplicacion por 2
-            valorActual = valorActual/2
+            valorActual = int(valorActual//2)
             movimientos.append(valorActual)
             return movimientos
         elif (valorActual-1)%10 == 0 and (valorActual-1)/10 >= valorInicial: # Si al valor le resto 1 y es divisible por 10 es probable que haya venido de haberle puesto un uno a la izq, por lo que hago la operacion contraria #aca creo que me falta una clausula para que quede bien definido
-            valorActual = (valorActual-1)/10 
+            valorActual = int((valorActual-1)//10) 
             movimientos.append(valorActual)
             return movimientos
         else: #el valor en el que estoy parado no es par ni tampoco tiene un uno a la izq, por lo que no puedo formar el valorInicial
