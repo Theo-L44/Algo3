@@ -1,9 +1,9 @@
-def recibirInput()-> list[int]:
+def recibirInput()->str:
     valores = input().split()
-    valorInicial = int(valores[0])
-    valorObjetivo = int(valores[1])
+    valorInicial:int = int(valores[0])
+    valorObjetivo:int = int(valores[1])
 
-    movimientos = listarMovimientos(valorInicial, valorObjetivo)
+    movimientos:list[int] = listarMovimientos(valorInicial, valorObjetivo)
     
     resultado:str = '' #resultado termina siendo un str que contiene si se puede o no formar la cadena de numeros, la cantidad de movimientos, y los movimientos
 
@@ -13,23 +13,27 @@ def recibirInput()-> list[int]:
         resultado = 'YES\n'+str(len(movimientos))+'\n'
 
         for i in range(len(movimientos)-1,-1,-1): #voy desde el final de la lista hasta el valor en la pos 0
-            n = str(movimientos[i]) #movimiento actual
-            resultado = resultado+' '+n
+            n = str(movimientos[i])
+            if n==str(movimientos[len(movimientos)-1]): #tengo que hacer esto para que no me agregue una identación al principio
+                resultado = resultado + n 
+            else:
+                resultado += ' '+n
 
     return resultado 
 
-def listarMovimientos(valorInicial:int, valorObjetivo:int):
-    movimientos = [valorObjetivo]
+def listarMovimientos(valorInicial:int, valorObjetivo:int)->list[int]:
+    movimientos = []
     valorActual = valorObjetivo
 
     while valorActual > valorInicial: #Me interesa ver si el numero en el que estoy parado es mayor al valor inicial, si lo es, continuo con el while, dentro del while me fijo si el valor es par, si resulta de la multiplicacion por 10 más la suma de 1 o si es exactamente el numero inicial.
-        
+        movimientos.append(valorActual)
+
         if valorActual % 2 == 0: #si el valor es par significa que provino de hacer la multiplicacion por 2
             valorActual = int(valorActual//2)
-            movimientos.append(valorActual)
-        elif (valorActual-1)%10 == 0 and (valorActual-1)//10 >= valorInicial: # Si al valor le resto 1 y es divisible por 10 es probable que haya venido de haberle puesto un uno a la izq, por lo que hago la operacion contraria #aca creo que me falta una clausula para que quede bien definido
+            #movimientos.append(valorActual)
+        elif (valorActual-1)%10 == 0:#and (valorActual-1)//10 >= valorInicial # Si al valor le resto 1 y es divisible por 10 es probable que haya venido de haberle puesto un uno a la izq, por lo que hago la operacion contraria #aca creo que me falta una clausula para que quede bien definido
             valorActual = int((valorActual-1)//10) 
-            movimientos.append(valorActual)
+            #movimientos.append(valorActual)
         else: #el valor en el que estoy parado no es par ni tampoco tiene un uno a la izq, por lo que no puedo formar el valorInicial
             movimientos = [] #no se puede formar la cadena de int que me lleva a mi resultado objetivos, por lo que ya se que la respuesta es no
             return movimientos
