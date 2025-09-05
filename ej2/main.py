@@ -1,17 +1,29 @@
-def recibirInput():
-    values = input().split()
-    valInicial = int(values[0])
-    valObjetivo = int(values[1])
-    
-    
-    return #print(valInicial+', '+valObjetivo)
+def recibirInput()-> list[int]:
+    valores = input().split()
+    valorInicial = int(valores[0])
+    valorObjetivo = int(valores[1])
+
+    movimientos = listarMovimientos(valorInicial, valorObjetivo)
+
+    return movimientos
+
+def listarMovimientos(valorInicial:int, valorObjetivo:int):
+    movimientos = []
+    valorActual = valorObjetivo
+
+    while valorActual > valorInicial:
+
+        if valorActual==valorInicial:
+            movimientos.append(valorActual)
+            
 
 
-
-
-#recibirInput('1  4')
+    return
 
 if __name__ == "__main__":
-    values = recibirInput()
+    output = recibirInput()
+
+    #for i in range(len()):
+        
     #output = cantidadesDeCambios(strings)
-    print('ok')
+    return output
