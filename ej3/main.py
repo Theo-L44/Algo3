@@ -1,7 +1,7 @@
 def recibirInput()->list[int]: #recibo el input puesto en consola
-    input = int(input().split)
-    numeroAsqueroso = input[0]
-    rango = [input[1],input[2]]
+    input:list[int] = int(input().split())
+    numeroAsqueroso:int = int(input[0])
+    rango:list[int] = [input[1],input[2]]
 
     listaDeUnos:list[int] = convertirEnUnos(numeroAsqueroso)
 
@@ -14,10 +14,15 @@ def recibirInput()->list[int]: #recibo el input puesto en consola
     return cantidadDeUnos
 
 def convertirEnUnos(n:int)->list[int]:
+    listaDeUnos:list[int] = [n]
 
-    
+    for numero in listaDeUnos:
+        if numero != 1 or numero!=0:
+            convertirEnUnos(numero)
 
-    return []
+    return listaDeUnos
+
+
 if __name__ == "__main__":
     numero = recibirInput() #recibo las palabras junto con sus largos
     output = 0
