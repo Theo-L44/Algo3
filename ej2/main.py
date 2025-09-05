@@ -1,5 +1,5 @@
 def recibirInput()->str:
-    valores = input().split()
+    valores = input().split() #me va a devolver ['valor1', 'valor2'] donde valor 1 es desde donde empiezo, y valor 2 es donde yo quiero terminar
     valorInicial:int = int(valores[0])
     valorObjetivo:int = int(valores[1])
 
@@ -14,33 +14,34 @@ def recibirInput()->str:
 
         for i in range(len(movimientos)-1,-1,-1): #voy desde el final de la lista hasta el valor en la pos 0
             n = str(movimientos[i])
+
             if n==str(movimientos[len(movimientos)-1]): #tengo que hacer esto para que no me agregue una identación al principio
                 resultado = resultado + n 
+
             else:
-                resultado += ' '+n
+                resultado += ' ' + n
 
     return resultado 
 
 def listarMovimientos(valorInicial:int, valorObjetivo:int)->list[int]:
     movimientos = []
-    valorActual = valorObjetivo
+    valorActual = valorObjetivo #empiezo de atras para adelante, eso me va a devolver, si existe, 1 camino posible
 
-    while valorActual > valorInicial: #Me interesa ver si el numero en el que estoy parado es mayor al valor inicial, si lo es, continuo con el while, dentro del while me fijo si el valor es par, si resulta de la multiplicacion por 10 más la suma de 1 o si es exactamente el numero inicial.
-        movimientos.append(valorActual)
+    while valorActual > valorInicial: #Me interesa ver si el numero en el que estoy parado es mayor al valor inicial, si lo es, continuo con el while, dentro me fijo si el valor actual es par o si resulta de la multiplicacion por 10 más la suma de 1
+        movimientos.append(valorActual) 
 
         if valorActual % 2 == 0: #si el valor es par significa que provino de hacer la multiplicacion por 2
-            valorActual = int(valorActual//2)
-            #movimientos.append(valorActual)
-        elif (valorActual-1)%10 == 0:#and (valorActual-1)//10 >= valorInicial # Si al valor le resto 1 y es divisible por 10 es probable que haya venido de haberle puesto un uno a la izq, por lo que hago la operacion contraria #aca creo que me falta una clausula para que quede bien definido
-            valorActual = int((valorActual-1)//10) 
-            #movimientos.append(valorActual)
+            valorActual = int(valorActual//2) #comprobe que es par, asi que divido por 2 en division entera 
+
+        elif (valorActual-1)%10 == 0: #Si al valor le resto 1 y es divisible por 10 es probable que haya venido de haberle puesto un uno a la izq, por lo que hago la operacion contraria #aca creo que me falta una clausula para que quede bien definido
+            valorActual = int((valorActual-1)//10) #comprobe que podia restar 1 y dividir por 10
+
         else: #el valor en el que estoy parado no es par ni tampoco tiene un uno a la izq, por lo que no puedo formar el valorInicial
             movimientos = [] #no se puede formar la cadena de int que me lleva a mi resultado objetivos, por lo que ya se que la respuesta es no
             return movimientos
         
     if valorActual==valorInicial:
             movimientos.append(valorActual) #llegué al valor inicial
-            valorActual = valorActual-1 #de esta manera me queda un valor menor al inicial y salgo del bucle
             return movimientos    
             
     return movimientos
