@@ -1,14 +1,18 @@
 def recibirInput()->list[int]: #recibo el input puesto en consola
-    input:list[int] = int(input().split())
+    input:list[int] = input().split()
     numeroAsqueroso:list[int] = [int(input[0])]
     rango:list[int] = [input[1],input[2]]
 
-    if numeroAsqueroso[0] != 1:
-        numeroAsqueroso = [numeroAsqueroso[0]//2, numeroAsqueroso[0]%2, numeroAsqueroso[0]//2]
-        
-    listaDeUnos:list[int] = convertirEnUnos(numeroAsqueroso)
+    if numeroAsqueroso[0] != 1 and numeroAsqueroso[0] != 0: #me pasaron un numero que no es 0 ni 1
+        parametroAsqueroso = [numeroAsqueroso[0]//2, numeroAsqueroso[0]%2, numeroAsqueroso[0]//2]
+    elif numeroAsqueroso[0]==1: #me pasaron solo un 1
+        return 1
+    else: #me pasaron un 0
+        return 0    
+    
+    listaDeUnos:list[int] = convertirEnUnos(parametroAsqueroso)
 
-    cantidadDeUnos = 0
+    cantidadDeUnos:int = 0
 
     for i in range(rango[0], rango[1]+1): 
         if listaDeUnos[i] == 1:
@@ -17,15 +21,18 @@ def recibirInput()->list[int]: #recibo el input puesto en consola
     return cantidadDeUnos
 
 def convertirEnUnos(n:list[int])->list[int]:
+    
     listaDeUnos:list[int] = n
 
-    mitad: int = len(listaDeUnos) // 2 #calculo donde esta la mitad del string para separar las dos mitades y hacer DyC
-    mitadIzq: str = listaDeUnos[:mitad] 
-    mitadDer: str = listaDeUnos[mitad:]
+    if len(listaDeUnos)==1 and (listaDeUnos[0]==1 or listaDeUnos[0]==0): #casos en el que la lista tiene solo 1 elemento
+        return listaDeUnos
+    elif len(listaDeUnos)==1:
+        listaDeUnos = [listaDeUnos[0]//2, listaDeUnos[0]%2, listaDeUnos[0]//2]
+        convertirEnUnos(listaDeUnos)
 
-    for numero in listaDeUnos:
-        if numero != 1 or numero!=0:
-            convertirEnUnos(numero)
+    for n in range(len(listaDeUnos)):
+        if listaDeUnos[n]>1:
+            listaDeUnos.extend(convertirEnUnos[listaDeUnos[n]])
 
     return listaDeUnos
 
