@@ -37,6 +37,5 @@ def convertirEnUnos(n:list[int])->list[int]:
     return listaDeUnos
 
 if __name__ == "__main__":
-    numero = recibirInput() #recibo las palabras junto con sus largos
-    output = 0
-    print(output)
+    unosEnRango = recibirInput() #recibo las palabras junto con sus largos
+    print(unosEnRango)
