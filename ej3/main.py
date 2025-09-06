@@ -1,16 +1,16 @@
 def recibirInput()->list[int]: #recibo el input puesto en consola
     input:list[int] = input().split()
-    numeroAsqueroso:list[int] = [int(input[0])]
+    numero:list[int] = [int(input[0])]
     rango:list[int] = [input[1],input[2]]
 
-    if numeroAsqueroso[0] != 1 and numeroAsqueroso[0] != 0: #me pasaron un numero que no es 0 ni 1
-        parametroAsqueroso = [numeroAsqueroso[0]//2, numeroAsqueroso[0]%2, numeroAsqueroso[0]//2]
-    elif numeroAsqueroso[0]==1: #me pasaron solo un 1
+    if numero[0] != 1 and numero[0] != 0: #me pasaron un numero que no es 0 ni 1
+        numero = [numero[0]//2, numero[0]%2, numero[0]//2]
+    elif numero[0]==1: #me pasaron solo un 1
         return 1
     else: #me pasaron un 0
         return 0    
     
-    listaDeUnos:list[int] = convertirEnUnos(parametroAsqueroso)
+    listaDeUnos:list[int] = convertirEnUnos(numero)
 
     cantidadDeUnos:int = 0
 
