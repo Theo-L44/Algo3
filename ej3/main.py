@@ -37,5 +37,4 @@ def convertirEnUnos(n:list[int])->list[int]:
     return listaDeUnos
 
 if __name__ == "__main__":
-    unosEnRango = recibirInput()
-    print(unosEnRango)
+    print(recibirInput())
