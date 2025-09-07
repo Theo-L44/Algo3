@@ -2,7 +2,7 @@ def recibirInput()->list[str]: #recibo el input puesto en consola
     cantidadCasos = int(input())
     palabras:list[str] = []     
     for i in range(0,cantidadCasos):
-        cantidadLetras = int(input()) #no me sirve realmente, aprovecho para descartar la linea de los largos de palabras
+        cantidadLetras = input() #no me sirve realmente, aprovecho para descartar la linea de los largos de palabras
         palabra = input()
         palabras.append(palabra)
     
@@ -36,13 +36,13 @@ def esPalabraLinda(largo:int, palabra:str, letra:str) -> int: #aca decido si el 
     letrasDistintasCaso1:int = 0 #este es el caso donde la primer mitad es l-linda y la segunda l+1 linda
     for l in mitadIzq:
         if l != letra:
-            letrasDistintasCaso1 += 1
+            letrasDistintasCaso1 += 1 #sumo cambios por cada letra que no sea 'l'-linda
     letrasDistintasCaso1 += esPalabraLinda(len(mitadDer), mitadDer, chr(ord(letra)+1)) 
 
     letrasDistintasCaso2:int = 0 #este es el caso donde la segunda mitad es l-linda y la primer mitad es l+1 linda
     for l in mitadDer:
         if l != letra:
-            letrasDistintasCaso2 += 1
+            letrasDistintasCaso2 += 1 #sumo cambios por cada letra que no sea 'l'-linda
     letrasDistintasCaso2 += esPalabraLinda(len(mitadIzq), mitadIzq, chr(ord(letra)+1))
 
     if letrasDistintasCaso1 <= letrasDistintasCaso2: #miro a ver que caso me conviene
