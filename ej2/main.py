@@ -47,5 +47,4 @@ def listarMovimientos(valorInicial:int, valorObjetivo:int)->list[int]:
     return movimientos
 
 if __name__ == "__main__":
-    output = recibirInput()
-    print(output)
+    print(recibirInput())
