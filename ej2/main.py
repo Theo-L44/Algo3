@@ -41,8 +41,8 @@ def listarMovimientos(valorInicial:int, valorObjetivo:int)->list[int]:
             return movimientos
         
     if valorActual==valorInicial:
-            movimientos.append(valorActual) #llegué al valor inicial
-            return movimientos    
+        movimientos.append(valorActual) #llegué al valor inicial
+        return movimientos    
             
     return movimientos
 
