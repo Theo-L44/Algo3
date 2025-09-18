@@ -23,8 +23,6 @@ def calcularCambios(n,costos,palabras):
 
     for i in range(1,n): #completo el resto de espacios
         memoria.append([invalido,invalido])
-    
-    
 
     for i in range(1,n):
         revertidaAnterior = palabras[i-1][::-1]        
