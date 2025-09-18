@@ -19,29 +19,33 @@ def calcularCambios(n,costos,palabras):
     invalido = 10**10
     cambios = 0
 
-    memoria =[[0,costos[0]]] #inicializo la matriz con el caso base del costo de girar la primer palabra
-
-    for i in range(1,n): #completo el resto de espacios
+    memoria =[] #inicializo la matriz con el caso base del costo de girar la primer palabra
+    
+    for i in range(0,n): #completo el resto de espacios
         memoria.append([invalido,invalido])
+    
+    memoria[0][0] = 0 
+    memoria[0][1] = costos[0]
 
-    for i in range(1,n):
+    for i in range(1, n):
         revertidaAnterior = palabras[i-1][::-1]        
 
         #primero veo el caso revirtiendo la palabra anterior
         if palabras[i-1] <= palabras[i]:
-            memoria[i][0] = min(memoria[i][0],memoria[i-1][1]) #veo si es menor que la palabra anterior 
+            memoria[i][0] = min(memoria[i][0], memoria[i-1][0]) #veo si es menor que la palabra anterior 
         if revertidaAnterior <= palabras[i]:
-            memoria[i][0] = min(memoria[i][0],memoria[i-1][1])
+            memoria[i][0] = min(memoria[i][0], memoria[i-1][1])
 
         revertida = palabras[i][::-1] #ahora revierto la palabra actual
 
         #ahora veo que pasa si tengo la palabra actual revertida    
         if palabras[i-1] <= revertida:
-            memoria[i][1] = min(memoria[i][0],memoria[i-1][1]+costos[i])
+            memoria[i][1] = min(memoria[i][0], memoria[i-1][0] + costos[i])
         if revertidaAnterior <= revertida:
-            memoria[i][1] = min(memoria[i][0],memoria[i-1][1]+costos[i])
+            memoria[i][1] = min(memoria[i][0], memoria[i-1][1] + costos[i])
 
     cambios = min(memoria[n-1][0], memoria[n-1][1])
+
     if cambios >= invalido:
         return -1
     else:
