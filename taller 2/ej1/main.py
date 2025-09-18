@@ -10,24 +10,47 @@ def recibirInput():
     for i in range(n):
         palabras.append(input().strip())
 
-    respuesta = calcularCambios(n,costos,palabras)
+    respuesta = calcularCambios(n, costos, palabras)
 
     return respuesta
  
 
 def calcularCambios(n,costos,palabras):
-    memoria = [[invalido,invalido] for i in range(n)] #inicio la memoria
-    i = 0
-    cambios = 0
     invalido = 10**10
+    cambios = 0
 
+    memoria =[[0,costos[0]]] #inicializo la matriz con el caso base del costo de girar la primer palabra
 
-
-    #    reverso = palabras[i][::-1]
-    #    memoria.append(reverso)
-    #    i+1
+    for i in range(1,n): #completo el resto de espacios
+        memoria.append([invalido,invalido])
     
-    return cambios
+    
+
+    for i in range(1,n):
+        revertidaAnterior = palabras[i-1][::-1]        
+
+        #primero veo el caso revirtiendo la palabra anterior
+        if palabras[i-1] <= palabras[i]:
+            memoria[i][0] = min(memoria[i-1][0],memoria[i-1][1]) #veo si es menor que la palabra anterior 
+        if revertidaAnterior <= palabras[i]:
+            memoria[i][0] = min(memoria[i-1][0],memoria[i-1][1])
+
+        revertida = palabras[i][::-1] #ahora revierto la palabra actual
+
+        #ahora veo que pasa si tengo la palabra actual revertida    
+        if palabras[i-1] <= revertida:
+            memoria[i][1] = min(memoria[i-1][0],memoria[i-1][1]+costos[i])
+        if revertidaAnterior <= revertida:
+            memoria[i][1] = min(memoria[i-1][0],memoria[i-1][1]+costos[i])
+
+        
+    #reverso = palabras[i][::-1]
+
+    cambios = min(memoria[n-1][0], memoria[n-1][1])
+    if cambios >= invalido:
+        return -1
+    else:
+        return cambios
 
 if __name__ == "__main__":
     movimientos = recibirInput()
