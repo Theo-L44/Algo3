@@ -62,7 +62,6 @@ if __name__ == "__main__":
 # abc
 # efg
 # hij
-
 # >Output
 # 0
 
@@ -72,7 +71,6 @@ if __name__ == "__main__":
 # za
 # yb
 # xc
-
 # >Output
 # 300
 
