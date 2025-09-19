@@ -15,8 +15,8 @@ def recibirInput():
     return respuesta
  
 def calcularCambios(n,costos,palabras):
-    invalido = 10**10
-    cambios = 0
+    invalido = 10**10 #numero muy grande para hacer de infinito
+    cambios = 0 #tracker de la suma
 
     memoria = [] #inicializo la matriz con el caso base del costo de girar la primer palabra
     
@@ -24,15 +24,15 @@ def calcularCambios(n,costos,palabras):
         memoria.append([invalido,invalido])
     
     memoria[0][0] = 0 
-    memoria[0][1] = costos[0]
+    memoria[0][1] = costos[0] #casos base 
 
     for i in range(1, n):
-        revertidaAnterior = palabras[i-1][::-1]        
+        anteriorRevertida = palabras[i-1][::-1] #invierto la palabra anterior
 
         #primero veo el caso revirtiendo la palabra anterior
         if palabras[i-1] <= palabras[i]:
             memoria[i][0] = min(memoria[i][1], memoria[i-1][0]) #veo si es menor que la palabra anterior 
-        if revertidaAnterior <= palabras[i]:
+        if anteriorRevertida <= palabras[i]:
             memoria[i][0] = min(memoria[i][1], memoria[i-1][1])
 
         revertida = palabras[i][::-1] #ahora revierto la palabra actual
@@ -40,19 +40,19 @@ def calcularCambios(n,costos,palabras):
         #ahora veo que pasa si tengo la palabra actual revertida    
         if palabras[i-1] <= revertida:
             memoria[i][1] = min(memoria[i][1], memoria[i-1][0] + costos[i])
-        if revertidaAnterior <= revertida:
+        if anteriorRevertida <= revertida: #ambas palabras estan revertidas
             memoria[i][1] = min(memoria[i][1], memoria[i-1][1] + costos[i])
 
-    cambios = min(memoria[n-1][0], memoria[n-1][1])
+    cambios = min(memoria[n-1][0], memoria[n-1][1]) #fui acumulando resultados en memoria, devuelvo el menor
 
-    if cambios >= invalido:
+    if cambios >= invalido: #si el ejercicio es imposible devuelvo -1
         return -1
     else:
         return cambios
 
 if __name__ == "__main__":
     movimientos = recibirInput()
-    print(movimientos)
+    print(movimientos) #devuelvo la suma de los costos por la mínima cantidad de movimientos que debo hacer para que quede ordenado alfabeticamente
 
 #para dar vuelta un string uso reversed_string = my_string[::-1] entonces pasa de 'hola' a 'aloh'
 #para obtener el valor de una letra (a=1, b=2, etc), uso 
