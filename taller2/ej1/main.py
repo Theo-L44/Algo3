@@ -55,7 +55,6 @@ if __name__ == "__main__":
     print(movimientos) #devuelvo la suma de los costos por la mínima cantidad de movimientos que debo hacer para que quede ordenado alfabeticamente
 
 #para dar vuelta un string uso reversed_string = my_string[::-1] entonces pasa de 'hola' a 'aloh'
-#para obtener el valor de una letra (a=1, b=2, etc), uso 
 
 #>Input
 # 3
