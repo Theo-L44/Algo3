@@ -15,7 +15,7 @@ def recibirInput():
     return respuesta
  
 def calcularCambios(n,costos,palabras):
-    invalido = 10**10 #numero muy grande para hacer de infinito
+    invalido = 10**15 #numero muy grande para hacer de infinito
     cambios = 0 #tracker de la suma
 
     memoria = [] #inicializo la matriz con el caso base del costo de girar la primer palabra
