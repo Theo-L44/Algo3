@@ -31,9 +31,9 @@ def calcularCambios(n,costos,palabras):
 
         #primero veo el caso revirtiendo la palabra anterior
         if palabras[i-1] <= palabras[i]:
-            memoria[i][0] = min(memoria[i][1], memoria[i-1][0]) #veo si es menor que la palabra anterior 
+            memoria[i][0] = min(memoria[i][0], memoria[i-1][0]) #veo si es menor que la palabra anterior 
         if anteriorRevertida <= palabras[i]:
-            memoria[i][0] = min(memoria[i][1], memoria[i-1][1])
+            memoria[i][0] = min(memoria[i][0], memoria[i-1][1])
 
         revertida = palabras[i][::-1] #ahora revierto la palabra actual
 
