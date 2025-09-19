@@ -21,7 +21,7 @@ def calcularCambios(n,costos,palabras):
     memoria = [] #inicializo la matriz con el caso base del costo de girar la primer palabra
     
     for i in range(0,n): #completo el resto de espacios
-        memoria.append([invalido,invalido])
+        memoria.append([invalido, invalido])
     
     memoria[0][0] = 0 
     memoria[0][1] = costos[0] #casos base 
