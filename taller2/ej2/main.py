@@ -1,6 +1,6 @@
 def recibirInput():
     n:int = int(input().strip()) #longitud del string
-    palabra:str = input().split()
+    palabra:str = input().strip()
 
     respuesta:int = cantidadSubsecuencias(n, palabra)
     return respuesta
@@ -12,12 +12,10 @@ def cantidadSubsecuencias(n:int, palabra:str):
     for i in range(n):
         memoria.append([invalido]*n) #revisar, creo la matriz
 
-    for i in range(n): #
+    for i in range(n): 
         memoria[i][i] = 1
 
-
-
-    return 1 
+    return 1 #placeholder
 
 if __name__ == "__main__":
     cantOperaciones = recibirInput()
