@@ -8,8 +8,8 @@ def recibirInput():
     for _ in range(n):
         memoria.append([invalido]*n) #creo la matriz
     
-    resultado = cantidadOperaciones(0, n - 1, palabra, memoria)
-    return resultado
+    respuesta = cantidadOperaciones(0, n - 1, palabra, memoria)
+    return respuesta
 
 def cantidadOperaciones(i, j, palabra, memoria): #abcba
     if i > j:
@@ -32,5 +32,5 @@ def cantidadOperaciones(i, j, palabra, memoria): #abcba
     return operaciones
 
 if __name__ == "__main__":
-    resultado = recibirInput()
-    print(resultado)
+    respuesta = recibirInput()
+    print(respuesta)
