@@ -13,9 +13,9 @@ def recibirInput():
 
 def cantidadOperaciones(i, j, palabra, memoria): #abcba
     if i > j:
-        return 0 #no tengo mas palabra
+        return 0 #no tengo mas palabra (los rangos son invalidos)
     
-    if memoria[i][j] != -1:
+    if memoria[i][j] != 10**15:
         return memoria[i][j] #ya tengo el resultado, no lo vuelvo a calcular
     
     if i == j:
@@ -26,7 +26,12 @@ def cantidadOperaciones(i, j, palabra, memoria): #abcba
     
     for k in range(i + 1, j + 1): #busco letras iguales asi no las elimino, y quedan para el final
         if palabra[i] == palabra[k]:
-            operaciones = min(operaciones, cantidadOperaciones(i + 1, k - 1, palabra, memoria) + cantidadOperaciones(k, j, palabra, memoria))
+            medio = cantidadOperaciones(i+1, k-1, palabra, memoria)
+            faltante = cantidadOperaciones(k, j, palabra, memoria)
+            letrasIguales = medio + faltante
+
+            if letrasIguales < operaciones:
+                operaciones = letrasIguales
     
     memoria[i][j] = operaciones #escribo la memoria
     return operaciones
