@@ -4,6 +4,7 @@ def recibirInput():
     
     memoria = [] #inicio la memoria
     invalido = 10**15
+    
     if n == 0:
         return 0
     
