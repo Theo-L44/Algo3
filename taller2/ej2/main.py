@@ -5,13 +5,13 @@ def recibirInput():
     memoria = [] #inicio la memoria
     invalido = 10**15
     
-    if n == 0:
+    if n == 0: #caso en el que no hay palabra
         return 0
     
     for _ in range(n):
         memoria.append([invalido]*n) #creo la matriz con valores invalidos
     
-    respuesta = cantidadOperaciones(0, n - 1, palabra, memoria)
+    respuesta = cantidadOperaciones(0, n - 1, palabra, memoria) #le paso los indices de inicio y fin de la palabra
     return respuesta
 
 def cantidadOperaciones(i, j, palabra, memoria):
