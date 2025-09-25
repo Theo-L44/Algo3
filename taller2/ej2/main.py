@@ -24,16 +24,16 @@ def cantidadOperaciones(i, j, palabra, memoria): #abcba
 
     operaciones = 1 + cantidadOperaciones(i + 1, j, palabra, memoria) 
     
-    for k in range(i + 1, j + 1): #busco letras iguales asi no las elimino, y quedan para el final
+    for k in range(i + 1, j + 1):
         if palabra[i] == palabra[k]:
-            medio = cantidadOperaciones(i+1, k-1, palabra, memoria)
-            faltante = cantidadOperaciones(k, j, palabra, memoria)
-            letrasIguales = medio + faltante
+            medio = cantidadOperaciones(i+1, k-1, palabra, memoria) 
+            faltante = cantidadOperaciones(k, j, palabra, memoria) #string que me falta calcular
+            costo = medio + faltante 
 
-            if letrasIguales < operaciones:
-                operaciones = letrasIguales
+            if costo < operaciones:
+                operaciones = costo
     
-    memoria[i][j] = operaciones #escribo la memoria
+    memoria[i][j] = operaciones #reescribo la memoria
     return operaciones
 
 if __name__ == "__main__":
