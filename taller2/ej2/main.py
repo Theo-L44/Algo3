@@ -6,12 +6,12 @@ def recibirInput():
     invalido = 10**15
 
     for _ in range(n):
-        memoria.append([invalido]*n) #creo la matriz
+        memoria.append([invalido]*n) #creo la matriz con valores invalidos
     
     respuesta = cantidadOperaciones(0, n - 1, palabra, memoria)
     return respuesta
 
-def cantidadOperaciones(i, j, palabra, memoria): #abcba
+def cantidadOperaciones(i, j, palabra, memoria):
     if i > j:
         return 0 #no tengo mas palabra (los rangos son invalidos)
     
@@ -19,7 +19,7 @@ def cantidadOperaciones(i, j, palabra, memoria): #abcba
         return memoria[i][j] #ya tengo el resultado, no lo vuelvo a calcular
     
     if i == j:
-        memoria[i][j] = 1 #caso base en el que tengo solo 1 letra
+        memoria[i][j] = 1 #caso en el que tengo solo 1 letra
         return 1
 
     operaciones = 1 + cantidadOperaciones(i + 1, j, palabra, memoria) 
