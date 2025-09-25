@@ -4,7 +4,8 @@ def recibirInput():
     
     memoria = [] #inicio la memoria
     invalido = 10**15
-
+    if n == 0:
+        return 0
     for _ in range(n):
         memoria.append([invalido]*n) #creo la matriz con valores invalidos
     
