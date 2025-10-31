@@ -1,9 +1,13 @@
 def recibirInput():
-    n:int = (input().strip()) 
-    return True
+    inicio:int = int(input().strip())
+    fin:int = int(input().strip())
+    
+    res = contarClicks(inicio,fin)
+    return res
 
-def resolver():
-    return True
+def contarClicks(inicio,fin):
+    
+    return 0
 
 if __name__ == "__main__":
     respuesta = recibirInput()
