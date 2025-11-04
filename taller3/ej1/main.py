@@ -19,7 +19,7 @@ def contarClicks(inicio,fin,grafo):
     grafo.append((inicio,0))
     calculados:list[int] = [inicio] #valores por los que pase
     
-    while fin not in calculados: #hago todas las operaciones, luego si fin aparece en la lista de calculados
+    while fin not in calculados: #"apreto" los botones, luego si fin aparece en la lista de calculados ya tengo calculados los movimientos
        actual:int; movimientos:int= grafo.popleft()
        rojo:int = actual * 2
        azul:int = actual - 1
