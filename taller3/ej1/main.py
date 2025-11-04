@@ -1,42 +1,41 @@
 from collections import deque 
 
 def recibirInput():
-    datos = input().split()
+    datos:list[int] = input().split()
     inicio:int = int(datos[0])
     fin:int = int(datos[1])
+    grafo = deque()
+
+    res:int = contarClicks(inicio,fin,grafo)
     
-    res = contarClicks(inicio,fin)
     return res
 
-def contarClicks(inicio,fin):
+def contarClicks(inicio,fin,grafo):
     if inicio>=fin:
         return inicio-fin #devuelvo la diferencia (sería la cantidad de clicks en botón azul)
     
-    grafo = deque()
     movimientos:int = 0
     
     grafo.append((inicio,0))
-    calculados = [inicio] #valores por los que pase
+    calculados:list[int] = [inicio] #valores por los que pase
     
-
     while fin not in calculados: #hago todas las operaciones, luego si fin aparece en la lista de calculados
-       actual, movimientos= grafo.popleft()
-       rojo = actual * 2
-       azul = actual - 1
+       actual:int; movimientos:int= grafo.popleft()
+       rojo:int = actual * 2
+       azul:int = actual - 1
+       
        #boton rojo
-       if rojo<=(10000) and rojo not in calculados:
+       if (rojo <= 10000) and (rojo not in calculados):
         calculados.append(rojo)
         grafo.append((rojo,movimientos+1))
 
         #boton azul
-        if azul >=1 and azul not in calculados:
+        if (azul >= 1) and (azul not in calculados):
            calculados.append(azul)
            grafo.append((azul,movimientos+1))
     
     return movimientos
 
 if __name__ == "__main__":
-    respuesta = recibirInput()
+    respuesta:int = recibirInput()
     print(respuesta)
-
-#--------------------------------------------------
