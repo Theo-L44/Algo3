@@ -15,27 +15,28 @@ def contarClicks(inicio,fin):
     grafo = deque()
     movimientos:int = 0
     
-    grafo.append(inicio)
-    visitados = [inicio] #valores por los que pase
+    grafo.append((inicio,0))
+    calculados = [inicio] #valores por los que pase
     
 
-    while fin not in visitados:
-       siguiente = visitados[len(visitados)-1] * 2 #boton rojo
-       if siguiente<=(10^4) and siguiente not in visitados:
-        visitados.append(siguiente)
-        grafo.append(siguiente)
-        movimientos +=1
+    while fin not in calculados: #hago todas las operaciones, luego si fin aparece en la lista de calculados
+       actual, movimientos= grafo.popleft()
+       rojo = actual * 2
+       azul = actual - 1
+       #boton rojo
+       if rojo<=(10000) and rojo not in calculados:
+        calculados.append(rojo)
+        grafo.append((rojo,movimientos+1))
 
-
-        siguiente = visitados[len(visitados)-2] - 1
         #boton azul
-        if siguiente >=1 and siguiente not in visitados:
-           visitados.append(siguiente)
-           grafo.append(siguiente)
-           movimientos += 1
+        if azul >=1 and azul not in calculados:
+           calculados.append(azul)
+           grafo.append((azul,movimientos+1))
     
     return movimientos
 
 if __name__ == "__main__":
     respuesta = recibirInput()
     print(respuesta)
+
+#--------------------------------------------------
