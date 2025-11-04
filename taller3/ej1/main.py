@@ -17,25 +17,27 @@ def contarClicks(inicio,fin,grafo):
     movimientos:int = 0
     
     grafo.append((inicio,0))
-    calculados:list[int] = [inicio] #valores por los que pase
+    calculados = set() #valores por los que pase
+    calculados.add(inicio)
     
-    while fin not in calculados: #"apreto" los botones, luego si fin aparece en la lista de calculados ya tengo calculados los movimientos
-       actual:int; movimientos:int= grafo.popleft()
+    while True: #"apreto" los botones, luego si fin aparece en la lista de calculados ya tengo calculados los movimientos 
+       actual, movimientos= grafo.popleft()
+       if actual == fin:
+          return movimientos 
+
        rojo:int = actual * 2
        azul:int = actual - 1
        
        #boton rojo
-       if (rojo <= 10000) and (rojo not in calculados):
-        calculados.append(rojo)
+       if (rojo <= 20000) and (rojo not in calculados):
+        calculados.add(rojo)
         grafo.append((rojo,movimientos+1))
 
         #boton azul
         if (azul >= 1) and (azul not in calculados):
-           calculados.append(azul)
+           calculados.add(azul)
            grafo.append((azul,movimientos+1))
-    
-    return movimientos
 
 if __name__ == "__main__":
-    respuesta:int = recibirInput()
+    respuesta = str(recibirInput())
     print(respuesta)
