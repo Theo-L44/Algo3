@@ -17,13 +17,21 @@ def recibirInput():
         portales[planetaInicio].append((planetaDestino,tiempo)) #agrego en la posición "planetaInicio" los planetas a los que pouedo llegar desde ese planeta como una tupla planeta/tiempo
         portales[planetaDestino].append((planetaInicio,tiempo)) #como son bidireccionales los portales, agrego en la posicion 
     
-    
+    viajeros = []
+    for _ in range(cantPlanetas):
+        datos = input().split()
+        cantViajeros = int(datos[0]) #cantidad de viajeros que van a ocupar un portal de un planeta
+        minutoEspera = [] #tiempos en los que aparecen los otros viajeros en los portales
+        for n in range(1, n+1):
+            minutoEspera.append(int(datos[n]))
+        viajeros.append(minutoEspera)
 
-    res:int = contarTiempo(portales)
+
+    res:int = contarTiempo(cantPlanetas, portales, viajeros)
     
     return res
 
-def contarTiempo(grafo):
+def contarTiempo(cantPlanetas, grafo, llegadas):
     
     tiempoTotal:int = 0
     
