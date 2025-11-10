@@ -4,7 +4,7 @@ def recibirInput():
     datos = input().split()
     cantidadPlanetas = int(datos[0])
     cantidadPortales = int(datos[1])
-    galaxia = []
+    galaxia = [] #es el mapa de la galaxia
 
     for _ in range(cantidadPlanetas+1):
         galaxia.append([])
@@ -14,26 +14,26 @@ def recibirInput():
         planetaInicio = int(datos[0])
         planetaDestino = int(datos[1])
         tiempo = int(datos[2])
-        galaxia[planetaInicio].append((planetaDestino, tiempo)) #agrego en la posición "planetaInicio" los planetas a los que pouedo llegar desde ese planeta como una tupla planeta/tiempo
-        galaxia[planetaDestino].append((planetaInicio, tiempo)) #como son bidireccionales los portales, agrego en la posicion 
+        galaxia[planetaInicio].append((planetaDestino, tiempo)) #agrego en la posición planetaInicio los planetas a los que pouedo llegar desde ese planeta como una tupla planeta/tiempo
+        galaxia[planetaDestino].append((planetaInicio, tiempo)) #los portales son bidireccionales
     
     viajeros = []
     for _ in range(cantidadPlanetas):
         datos = input().split()
-        cantViajeros = int(datos[0]) #cantidad de viajeros que van a ocupar un portal de un planeta
+        cantViajeros= int(datos[0]) #cantidad de viajeros que van a ocupar un portal de un planeta en algun tiempo
         minutoEspera = [] #tiempos en los que aparecen los otros viajeros en los portales
         
-        for n in range(1, cantViajeros+1):
-            minutoEspera.append(int(datos[n]))
+        for viajero in range(1, cantViajeros+1):
+            minutoEspera.append(int(datos[viajero])) 
         
-        viajeros.append(minutoEspera)
+        viajeros.append(minutoEspera) 
 
     res:int = contarTiempo(cantidadPlanetas, galaxia, viajeros)
     
     return res
 
 def contarTiempo(cantidadPlanetas, galaxia, viajeros):
-    tiempoTotal:int = -1 #no se puede llegar al planeta destino
+    tiempoTotal = -1 #no se puede llegar al planeta destino
     tiempoPortal = []
     
     for _ in range(0, cantidadPlanetas+1):
@@ -47,7 +47,7 @@ def contarTiempo(cantidadPlanetas, galaxia, viajeros):
         planetaActual = heapq.heappop(elegirCamino)
 
         if planetaActual[0] != tiempoPortal[planetaActual[1]]:
-            continue
+         continue
 
         if planetaActual[1] == cantidadPlanetas: #me fijo si es el último planeta (donde está Zargon)
             tiempoTotal = planetaActual[0] 
@@ -55,20 +55,20 @@ def contarTiempo(cantidadPlanetas, galaxia, viajeros):
 
         tiempoEspera = 0
         for n in viajeros[planetaActual[1]-1]:
-            if n < planetaActual[0]: #llegué antes (o después) de que hubiesen otros viajeros
+            if n < planetaActual[0]: #llegué antes de que hubiesen otros viajeros
                 continue
             if n == planetaActual[0] + tiempoEspera: #había un viajero y tuve que esperar
-                tiempoEspera += 1
+                tiempoEspera+=1
         
         nuevoTiempo = planetaActual[0] + tiempoEspera #tiempo en el que llegué al planeta + la cantidad de segundos esperados
-        for siguientePlaneta, portal in galaxia[planetaActual[1]]:
+        for planeta, portal in galaxia[planetaActual[1]]:
             total = nuevoTiempo + portal #sumo lo que me tomó cruzar al planeta por el portal + tiempo que tuve que esperar (si es que tuve que hacerlo)
-            if total < tiempoPortal[siguientePlaneta]: #si el tiempo del camino que hice es menor del que me hubiese tomado ir directo, entonces elijo ese primer camino
-                tiempoPortal[siguientePlaneta] = total 
-                heapq.heappush(elegirCamino, (total, siguientePlaneta)) #lo sumo al min-heap
+            if total < tiempoPortal[planeta]: #si el tiempo del camino que hice es menor del que me hubiese tomado ir directo, entonces elijo ese primer camino
+                tiempoPortal[planeta] = total 
+                heapq.heappush(elegirCamino, (total, planeta)) #lo sumo al min-heap
 
     return tiempoTotal
 
-if __name__ == "__main__":
+if __name__ =="__main__":
     respuesta = str(recibirInput())
     print(respuesta)
