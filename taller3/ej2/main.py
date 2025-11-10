@@ -13,7 +13,7 @@ def recibirInput():
         datos = input().split()
         planetaInicio = int(datos[0])
         planetaDestino = int(datos[1])
-        tiempo = datos[2]
+        tiempo = int(datos[2])
         galaxia[planetaInicio].append((planetaDestino,tiempo)) #agrego en la posición "planetaInicio" los planetas a los que pouedo llegar desde ese planeta como una tupla planeta/tiempo
         galaxia[planetaDestino].append((planetaInicio,tiempo)) #como son bidireccionales los portales, agrego en la posicion 
     
@@ -38,30 +38,30 @@ def contarTiempo(cantPlanetas, galaxia, viajeros):
     tiempoPortal = []
     
     for _ in range(0,cantPlanetas+1):
-        tiempoPortal.append([10**18]) #propongo un numero enorme para despues comparar
+        tiempoPortal.append(10**18) #propongo un numero enorme para despues comparar por el mínimo
 
     tiempoPortal[1]=0
 
-    planetasSinExplorar  = [(0,1)] #(tiempo, planeta), el planeta 1 siempre tiene tiempo 0
+    planetasSinExplorar = [(0,1)] #(tiempo, planeta), el planeta 1 siempre tiene tiempo 0
 
     while len(planetasSinExplorar) != 0:
         nodoActual = heapq.heappop(planetasSinExplorar)
 
-        if nodoActual[0] != tiempoPortal:
+        if nodoActual[0] != tiempoPortal[nodoActual[1]]:
             continue
 
         if nodoActual[1] == cantPlanetas:
             tiempoTotal = nodoActual[0]
             break
 
-        revisar = 0 #CAMBIAR NOMBRE DE VARIABLE
+        tiempoEspera = 0 #CAMBIAR NOMBRE DE VARIABLE
         for momento in viajeros[nodoActual[1]-1]:
             if momento < nodoActual[0]:
                 continue
-            if momento == nodoActual[0] + revisar:
-                revisar += 1
+            if momento == nodoActual[0] + tiempoEspera:
+                tiempoEspera += 1
         
-        nuevoTiempo = nodoActual[0] + revisar
+        nuevoTiempo = nodoActual[0] + tiempoEspera
         for vecino, portal in galaxia[nodoActual[1]]:
             total = nuevoTiempo + portal
             if total < tiempoPortal[vecino]:
