@@ -41,7 +41,7 @@ def contarTiempo(cantidadPlanetas, galaxia, viajeros):
 
     tiempoPortal[1] = 0
 
-    elegirCamino = [(0,1)] #(tiempo, planeta), el planeta 1 siempre tiene tiempo 0
+    elegirCamino = [(0,1)] #min-heap, (tiempo, planeta), el planeta 1 siempre tiene tiempo 0
 
     while len(elegirCamino) != 0:
         planetaActual = heapq.heappop(elegirCamino)
