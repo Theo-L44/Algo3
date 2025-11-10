@@ -31,7 +31,7 @@ def recibirInput():
     
     return res
 
-def contarTiempo(cantPlanetas, galaxia, llegadas):
+def contarTiempo(cantPlanetas, galaxia, viajeros):
     
     tiempoTotal:int = -1 #no se puede llegar al planeta destino
 
@@ -45,11 +45,30 @@ def contarTiempo(cantPlanetas, galaxia, llegadas):
     planetasSinExplorar  = [(0,1)] #(tiempo, planeta), el planeta 1 siempre tiene tiempo 0
 
     while len(planetasSinExplorar) != 0:
-        break
+        nodoActual = heapq.heappop(planetasSinExplorar)
 
+        if nodoActual[0] != tiempoPortal:
+            continue
+
+        if nodoActual[1] == cantPlanetas:
+            tiempoTotal = nodoActual[0]
+            break
+
+        revisar = 0 #CAMBIAR NOMBRE DE VARIABLE
+        for momento in viajeros[nodoActual[1]-1]:
+            if momento < nodoActual[0]:
+                continue
+            if momento == nodoActual[0] + revisar:
+                revisar += 1
+        
+        nuevoTiempo = nodoActual[0] + revisar
+        for vecino, portal in galaxia[nodoActual[1]]:
+            total = nuevoTiempo + portal
+            if total < tiempoPortal[vecino]:
+                tiempoPortal[vecino] = total
+                heapq.heappush(planetasSinExplorar, (total, vecino))
 
     return tiempoTotal
-
 
 if __name__ == "__main__":
     respuesta = str(recibirInput())
