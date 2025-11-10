@@ -28,15 +28,12 @@ def recibirInput():
         
         viajeros.append(minutoEspera)
 
-
     res:int = contarTiempo(cantidadPlanetas, galaxia, viajeros)
     
     return res
 
 def contarTiempo(cantidadPlanetas, galaxia, viajeros):
-    
     tiempoTotal:int = -1 #no se puede llegar al planeta destino
-
     tiempoPortal = []
     
     for _ in range(0,cantidadPlanetas+1):
