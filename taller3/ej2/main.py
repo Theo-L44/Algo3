@@ -36,7 +36,7 @@ def contarTiempo(cantidadPlanetas, galaxia, viajeros):
     tiempoTotal:int = -1 #no se puede llegar al planeta destino
     tiempoPortal = []
     
-    for _ in range(0,cantidadPlanetas+1):
+    for _ in range(0, cantidadPlanetas+1):
         tiempoPortal.append(10**18) #propongo un numero enorme para despues comparar por el mínimo
 
     tiempoPortal[1] = 0
@@ -44,28 +44,28 @@ def contarTiempo(cantidadPlanetas, galaxia, viajeros):
     elegirCamino = [(0,1)] #(tiempo, planeta), el planeta 1 siempre tiene tiempo 0
 
     while len(elegirCamino) != 0:
-        nodoActual = heapq.heappop(elegirCamino)
+        planetaActual = heapq.heappop(elegirCamino)
 
-        if nodoActual[0] != tiempoPortal[nodoActual[1]]:
+        if planetaActual[0] != tiempoPortal[planetaActual[1]]:
             continue
 
-        if nodoActual[1] == cantidadPlanetas:
-            tiempoTotal = nodoActual[0]
+        if planetaActual[1] == cantidadPlanetas: #me fijo si es el último planeta (donde está Zargon)
+            tiempoTotal = planetaActual[0] 
             break
 
         tiempoEspera = 0
-        for n in viajeros[nodoActual[1]-1]:
-            if n < nodoActual[0]:
+        for n in viajeros[planetaActual[1]-1]:
+            if n < planetaActual[0]: #llegué antes (o después) de que hubiesen otros viajeros
                 continue
-            if n == nodoActual[0] + tiempoEspera:
+            if n == planetaActual[0] + tiempoEspera: #había un viajero y tuve que esperar
                 tiempoEspera += 1
         
-        nuevoTiempo = nodoActual[0] + tiempoEspera
-        for siguientePlaneta, portal in galaxia[nodoActual[1]]:
-            total = nuevoTiempo + portal
-            if total < tiempoPortal[siguientePlaneta]:
-                tiempoPortal[siguientePlaneta] = total
-                heapq.heappush(elegirCamino, (total, siguientePlaneta))
+        nuevoTiempo = planetaActual[0] + tiempoEspera #tiempo en el que llegué al planeta + la cantidad de segundos esperados
+        for siguientePlaneta, portal in galaxia[planetaActual[1]]:
+            total = nuevoTiempo + portal #sumo lo que me tomó cruzar al planeta por el portal + tiempo que tuve que esperar (si es que tuve que hacerlo)
+            if total < tiempoPortal[siguientePlaneta]: #si el tiempo del camino que hice es menor del que me hubiese tomado ir directo, entonces elijo ese primer camino
+                tiempoPortal[siguientePlaneta] = total 
+                heapq.heappush(elegirCamino, (total, siguientePlaneta)) #lo sumo al min-heap
 
     return tiempoTotal
 
